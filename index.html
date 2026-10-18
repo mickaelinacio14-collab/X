@@ -1,0 +1,104 @@
+
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mickey Kingdom TCG — CRM</title>
+<link rel="stylesheet" href="/style.css">
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="logo">MK</span>
+    <div>
+      <h1>Mickey Kingdom TCG</h1>
+      <p>CRM vente · rachat · trade</p>
+    </div>
+  </div>
+  <nav>
+    <button data-view="dashboard" class="active">Tableau de bord</button>
+    <button data-view="clients">Clients</button>
+    <button data-view="transactions">Ventes & trades</button>
+    <button data-view="reminders">Relances</button>
+    <button data-view="3d">CRM 3D</button>
+  </nav>
+</header>
+
+<main>
+  <section id="view-dashboard" class="view active">
+    <h2>Tableau de bord</h2>
+    <div class="cards" id="stats-cards"></div>
+    <div class="panel">
+      <h3>Top cartes vendues</h3>
+      <div id="top-cards"></div>
+    </div>
+  </section>
+
+  <section id="view-clients" class="view">
+    <div class="section-head">
+      <h2>Clients</h2>
+      <button class="primary" onclick="openClientModal()">+ Nouveau client</button>
+    </div>
+    <div class="toolbar">
+      <input id="client-search" placeholder="Rechercher un client..." oninput="renderClients()">
+      <select id="client-status" onchange="renderClients()">
+        <option value="">Tous les statuts</option>
+        <option value="prospect">Prospect</option>
+        <option value="actif">Client actif</option>
+        <option value="inactif">Client inactif</option>
+      </select>
+    </div>
+    <div id="clients-list" class="list"></div>
+  </section>
+
+  <section id="view-transactions" class="view">
+    <div class="section-head">
+      <h2>Ventes, rachats & trades</h2>
+      <button class="primary" onclick="openTransactionModal()">+ Nouvelle opération</button>
+    </div>
+    <div class="toolbar">
+      <input id="transaction-search" placeholder="Rechercher une carte ou un client..." oninput="renderTransactions()">
+      <select id="transaction-type" onchange="renderTransactions()">
+        <option value="">Tous les types</option>
+        <option value="vente">Vente</option>
+        <option value="achat">Rachat</option>
+        <option value="trade">Trade</option>
+      </select>
+    </div>
+    <div id="transactions-list" class="list"></div>
+  </section>
+
+  <section id="view-reminders" class="view">
+    <div class="section-head">
+      <h2>Relances</h2>
+      <button class="primary" onclick="openReminderModal()">+ Nouvelle relance</button>
+    </div>
+    <div id="reminders-list" class="list"></div>
+  </section>
+
+  <section id="view-3d" class="view">
+    <div class="section-head">
+      <h2>CRM 3D — Galaxie clients</h2>
+      <p class="muted">Clique sur une sphère pour ouvrir la fiche client.</p>
+    </div>
+    <div id="scene3d"></div>
+    <div id="client3d-panel" class="hidden"></div>
+  </section>
+</main>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modal-title">Nouveau</h3>
+      <button onclick="closeModal()">✕</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="/app.js"></script>
+</body>
+</html>
